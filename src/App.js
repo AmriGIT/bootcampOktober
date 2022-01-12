@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+
+import React, { useState } from 'react';
+
+import Navbar from './components/Navbar';
+import Movies from './pages/Movies';
+import AddMovie from './pages/AddMovie';
+
 
 function App() {
+
+  const [ toogleMenu, setToogleMenu ] = useState('');
+
+  function changeMenu(pages) {
+    setToogleMenu(pages);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Navbar clickMenu={changeMenu} />
+
+      { 
+        toogleMenu === 'movies' ?  <Movies /> : 
+        toogleMenu === 'add-movie' && <AddMovie /> 
+      }
+
+      
+      
     </div>
   );
 }
+
 
 export default App;
